@@ -38,5 +38,49 @@ namespace RomanNumerals
             return result;
         }
 
+        public int RomanNumeralToNumber(string romanNum)
+        {
+            var result = 0;
+
+            //reverse Roman numeral input
+            var charArray = romanNum.ToCharArray();
+            Array.Reverse(charArray);
+
+            List<int> firstNumberList = new List<int>();
+            List<int> secondNumberList = new List<int>();
+           
+            //convert roman numerals to numbers and add to a list
+            foreach (var letter in charArray)
+            {
+                foreach (var kvp in RomanNumsDic)
+                {
+                    if (letter.ToString() == kvp.Value)
+                    {
+                        firstNumberList.Add(kvp.Key);
+                        secondNumberList.Add(kvp.Key);
+                    }
+                } 
+            }
+
+            result = firstNumberList[0];
+
+            //compare numbers in lists to account for instances like 4 and 9
+            for (var i = 0; i < firstNumberList.Count; i++)
+            {
+                var index = i + 1;
+                
+                if (index == secondNumberList.Count)
+                {
+                    return result;
+                }
+                if (firstNumberList[i] > secondNumberList[index])
+                {
+                    result -= secondNumberList[index];
+                }
+            }
+
+            return result;
+        }
+
     }
 }
