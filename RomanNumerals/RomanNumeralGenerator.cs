@@ -71,11 +71,15 @@ namespace RomanNumerals
                 
                 if (index == secondNumberList.Count)
                 {
-                    return result;
+                    break;
                 }
-                if (firstNumberList[i] > secondNumberList[index])
+                else if (firstNumberList[i] > secondNumberList[index])
                 {
                     result -= secondNumberList[index];
+                }
+                else
+                {
+                    result += secondNumberList[index];
                 }
             }
 
