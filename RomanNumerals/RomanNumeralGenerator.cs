@@ -6,42 +6,33 @@ namespace RomanNumerals
 {
     public class RomanNumeralGenerator
     {
+        Dictionary<int, string> RomanNumsDic = new Dictionary<int, string>
+        {
+            {1000, "M"},
+            {900, "CM"},
+            {500, "D"},
+            {100, "C"},
+            {90, "XC"},
+            {50, "L"},
+            {40, "XL"},
+            {10, "X"},
+            {9, "IX"},
+            {5, "V"},
+            {4, "IV"},
+            {1, "I"},
+        };
         public string NumberToRomanNumeral(int number)
         {
+
             var result = "";
             var counter = number;
 
-            if (counter >= 9 && counter < 19)
+            foreach (var kvp in RomanNumsDic)
             {
-                counter-= 10;
-                if (counter == -1)
+                while(counter >= kvp.Key)
                 {
-                    result += "I";
-                }
-                result += "X";
-            }
-          
-            if (counter >= 4 && counter < 9)
-            {
-                counter = counter - 5;
-                if (counter == -1)
-                {
-                    result += "I";
-                }
-                result += "V";
-                while (counter > 0)
-                {
-                    result += "I";
-                    counter -= 1;
-                }
-            }
-
-            if (counter <= 3)
-            {
-                while (counter > 0)
-                {
-                    result += "I";
-                    counter -= 1;
+                    result += kvp.Value;
+                    counter -= kvp.Key;
                 }
             }
             return result;
